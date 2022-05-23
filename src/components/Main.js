@@ -1,35 +1,20 @@
-function Main() {
-
-    function handleEditAvatarClick() {
-        const editAvatarPopupElement = document.querySelector('.popup_type_edit-avatar');
-        editAvatarPopupElement.classList.add("popup_is-opened");
-    }
-
-    function handleEditProfileClick() {
-        const editProfilePopupElement = document.querySelector('.popup_type_edit-profile');
-        editProfilePopupElement.classList.add("popup_is-opened");
-    }
-
-    function handleAddPlaceClick() {
-        const addCardPopupElement = document.querySelector('.popup_type_add-card');
-        addCardPopupElement.classList.add("popup_is-opened");
-    }
+function Main(props) {
     
     return (
         <main className="main">
             <section className="profile">
                 <div className="profile-avatar">
                     <img src="#" alt="Аватар профиля" className="profile-avatar__image"/>
-                    <button className="profile-avatar__edit-avatar" onClick={handleEditAvatarClick}></button>
+                    <button className="profile-avatar__edit-avatar" onClick={props.onAddPlace}></button>
                 </div>
 
 
                 <div className="profile__info">
                     <h1 className="profile__title"></h1>
-                    <button className="profile__edit-button button-action" onClick={handleEditProfileClick}></button>
+                    <button className="profile__edit-button button-action" onClick={props.onEditProfile}></button>
                     <p className="profile__subtitle"></p>
                 </div>
-                <button className="profile__add-button button-action" onClick={handleAddPlaceClick}></button>
+                <button className="profile__add-button button-action" onClick={props.onAddPlace}></button>
             </section>
 
             <section className="photo-gallery">

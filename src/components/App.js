@@ -5,10 +5,27 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
 function App() {
+
+  function handleEditAvatarClick() {
+    console.log('Working');
+  }
+
+  function handleEditProfileClick() {
+    console.log('Working');
+  }
+
+  function handleAddPlaceClick() {
+    console.log('Working');
+  }
+
   return (
       <>
         <Header />
-        <Main />
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+        />
         <Footer/>
         <PopupWithForm
           name="edit-avatar"
