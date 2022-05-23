@@ -4,11 +4,13 @@ import Card from './Card'
 
 function Main(props) {
 
+  // Установка хуков.
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([]);
 
+  //  Установка эффекта для стейта, где обрабатываются данные.
   React.useEffect(() => {
     api.getAllData()
       .then(([userData, cardsData]) => {
@@ -18,7 +20,7 @@ function Main(props) {
         setCards(cardsData);
       })
       .catch(err => console.log(err));
-  })
+  }, [])
     
     return (
         <main className="main">
@@ -39,10 +41,9 @@ function Main(props) {
             <section className="photo-gallery">
                 <ul className="photo-gallery__list">
                   {cards.map((card) =>
-                    <Card key={card._id} card={card}/>)}
+                    <Card key={card._id} card={card} onCardClick={props.onCardClick}/>)}
                 </ul>
             </section>
-
         </main>
     );
 }
