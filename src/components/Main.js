@@ -1,19 +1,4 @@
 function Main() {
-
-    function handleEditAvatarClick() {
-        const editAvatarPopupElement = document.querySelector('.popup-edit-avatar');
-        handleEditAvatarClick.classList.add("popup_is-opened");
-    }
-
-    function handleEditProfileClick() {
-        const editProfilePopupElement = document.querySelector('.popup-edit-profile');
-        editProfilePopupElement.classList.add("popup_is-opened");
-    }
-    
-    function handleAddPlaceClick() {
-        const addCardPopupElement = document.querySelector('.popup-add-card');
-        addCardPopupElement.classList.add("popup_is-opened");
-    }
     
     return (
         <main className="main">
