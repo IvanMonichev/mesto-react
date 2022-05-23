@@ -1,6 +1,6 @@
 import React from "react";
 import api from '../utils/Api'
-import trash from '../images/trash.svg';
+import Card from './Card'
 
 function Main(props) {
 
@@ -39,16 +39,7 @@ function Main(props) {
             <section className="photo-gallery">
                 <ul className="photo-gallery__list">
                   {cards.map((card) =>
-                    <li key={card._id} className="photo-gallery__item">
-                      <img src={card.link} alt="Фотография загруженная пользователем" className="photo-gallery__image" />
-                      <h2 className="photo-gallery__title">{card.name}</h2>
-                      <div className="photo-gallery__like-section">
-                      <button className="photo-gallery__like-button button-action"></button>
-                      <p className="photo-gallery__like-counter">{card.likes.length}</p>
-                      </div>
-                      <a className="photo-gallery__delete-button button-action"><img
-                      src={trash} alt="Корзина удаления" /></a>
-                    </li>)}
+                    <Card key={card._id} card={card}/>)}
                 </ul>
             </section>
 
