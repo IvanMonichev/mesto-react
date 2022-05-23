@@ -5,9 +5,8 @@ function Main(props) {
             <section className="profile">
                 <div className="profile-avatar">
                     <img src="#" alt="Аватар профиля" className="profile-avatar__image"/>
-                    <button className="profile-avatar__edit-avatar" onClick={props.onAddPlace}></button>
+                    <button className="profile-avatar__edit-avatar" onClick={props.onEditAvatar}></button>
                 </div>
-
 
                 <div className="profile__info">
                     <h1 className="profile__title"></h1>

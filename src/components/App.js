@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -6,30 +7,46 @@ import ImagePopup from "./ImagePopup";
 
 function App() {
 
+  // Установка хуков на управление состояния формы (открыта/закрыта)
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+
+  // Вызов обработчиков для изменения состояния
   function handleEditAvatarClick() {
-    console.log('Working');
+    setEditAvatarPopupOpen(!isEditAvatarPopupOpen);
   }
 
   function handleEditProfileClick() {
-    console.log('Working');
+    setEditProfilePopupOpen(!isEditProfilePopupOpen);
   }
 
   function handleAddPlaceClick() {
-    console.log('Working');
+    setAddPlacePopupOpen(!isAddPlacePopupOpen);
+  }
+
+  function closeAllPopups() {
+    setEditAvatarPopupOpen(false);
+    setEditProfilePopupOpen(false);
+    setAddPlacePopupOpen(false);
   }
 
   return (
       <>
         <Header />
+
         <Main
+          onEditAvatar={handleEditAvatarClick}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
         />
         <Footer/>
+
         <PopupWithForm
           name="edit-avatar"
           title="Обновить аватар"
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
           children={
               <>
                 <input type="url"
@@ -41,12 +58,15 @@ function App() {
                        required />
                   <span className="popup__input-error avatar-input-error">Ошибка</span>
                   <button className="popup__save-button button-action">Сохранить</button>
-                  <button type="button" className="popup__close-button button-action"></button>
               </>
-          } />
+          }
+        />
+
         <PopupWithForm
         name="edit-profile"
         title="Редактировать профиль"
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
         children={
             <>
                 <input type="text"
@@ -67,13 +87,16 @@ function App() {
                        maxLength="200" />
                 <span className="popup__input-error about-input-error">&nbsp;</span>
                 <button type="submit" className="popup__save-button button-action">Сохранить</button>
-                <button type="button" className="popup__close-button button-action"></button>
             </>
-        } />
+        }
+
+        />
 
         <PopupWithForm
           name="add-card"
           title="Новое место"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
           children={
             <>
               <input type="text" id="title-input" className="popup__text-input popup__text-input_type_title" name="name"
@@ -84,12 +107,12 @@ function App() {
                        placeholder="Ссылка на картинку" required />
                   <span className="popup__input-error link-input-error">Ошибка</span>
                   <button className="popup__save-button button-action">Создать</button>
-                  <button type="button" className="popup__close-button button-action"></button>
             </>
-          } />
+          }
 
+        />
 
-
+        <ImagePopup />
         <template className="photo-gallery__item-template">
           <li className="photo-gallery__item">
               <img src="../images" alt="Фотография загруженная пользователем «{title}»" className="photo-gallery__image" />
@@ -99,7 +122,7 @@ function App() {
                       <p className="photo-gallery__like-counter">0</p>
                   </div>
                   <a className="photo-gallery__delete-button button-action"><img
-                      src="<%=require('./images/trash.svg')%>" alt="Корзина удаления" /></a>
+                      src="/" alt="Корзина удаления" /></a>
           </li>
         </template>
 

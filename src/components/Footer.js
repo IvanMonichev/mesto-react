@@ -1,7 +1,9 @@
 function Footer() {
+  const date = new Date();
+
     return (
         <footer className="footer">
-            <p className="footer__text">© 2022 Ivan Monichev</p>
+            <p className="footer__text">© {date.getFullYear()} Ivan Monichev</p>
         </footer>
     );
 }
