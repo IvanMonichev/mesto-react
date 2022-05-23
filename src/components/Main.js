@@ -1,8 +1,8 @@
 function Main() {
 
     function handleEditAvatarClick() {
-        const editAvatarPopupElement = document.querySelector('.popup-edit-avatar');
-        handleEditAvatarClick.classList.add("popup_is-opened");
+        const editAvatarPopupElement = document.querySelector('.popup_type_edit-avatar');
+        editAvatarPopupElement.classList.add("popup_is-opened");
     }
 
     function handleEditProfileClick() {
@@ -11,7 +11,7 @@ function Main() {
     }
 
     function handleAddPlaceClick() {
-        const addCardPopupElement = document.querySelector('.popup-add-card');
+        const addCardPopupElement = document.querySelector('.popup_type_add-card');
         addCardPopupElement.classList.add("popup_is-opened");
     }
     
