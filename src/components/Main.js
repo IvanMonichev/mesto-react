@@ -2,7 +2,7 @@ import React from "react";
 import api from '../utils/Api'
 import Card from './Card'
 
-function Main(props) {
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
 
   // Установка хуков.
   const [userName, setUserName] = React.useState('');
@@ -27,21 +27,21 @@ function Main(props) {
             <section className="profile">
                 <div className="profile-avatar">
                     <img src={userAvatar} alt={`Аватар пользователя – ${userName}`} className="profile-avatar__image"/>
-                    <button className="profile-avatar__edit-avatar" onClick={props.onEditAvatar}></button>
+                    <button className="profile-avatar__edit-avatar" onClick={onEditAvatar}></button>
                 </div>
 
                 <div className="profile__info">
                     <h1 className="profile__title">{userName}</h1>
-                    <button className="profile__edit-button button-action" onClick={props.onEditProfile}></button>
+                    <button className="profile__edit-button button-action" onClick={onEditProfile}></button>
                     <p className="profile__subtitle">{userDescription}</p>
                 </div>
-                <button className="profile__add-button button-action" onClick={props.onAddPlace}></button>
+                <button className="profile__add-button button-action" onClick={onAddPlace}></button>
             </section>
 
             <section className="photo-gallery">
                 <ul className="photo-gallery__list">
                   {cards.map((card) =>
-                    <Card key={card._id} card={card} onCardClick={props.onCardClick}/>)}
+                    <Card key={card._id} card={card} onCardClick={onCardClick}/>)}
                 </ul>
             </section>
         </main>
