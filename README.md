@@ -17,5 +17,5 @@
 * React.
 
 ____
-Ссылка на страницу: [ivanmonichev.github.io/mesto](https://ivanmonichev.github.io/mesto/)
+Ссылка на страницу: [ivanmonichev.github.io/mesto-react](https://ivanmonichev.github.io/mesto-react/)
 ____
