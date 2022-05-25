@@ -11,7 +11,7 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState('');
+  const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''});
 
   // Вызов обработчиков для изменения состояния
   function handleEditAvatarClick() {
@@ -27,15 +27,16 @@ function App() {
   }
 
   const handleCardClick = (card) => {
-    setSelectedCard(card);
+      setSelectedCard(card);
   }
 
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
-    setSelectedCard('')
+    setSelectedCard({name: '', link: ''})
   }
+
 
   return (
       <>
@@ -52,30 +53,25 @@ function App() {
         <PopupWithForm
           name="edit-avatar"
           title="Обновить аватар"
+          textButton="Сохранить"
           isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          children={
-              <>
-                <input type="url"
-                       id="avatar-input"
-                       className="popup__text-input
-                        popup__text-input_type_avatar"
-                     name="avatar"
-                     placeholder="Ссылка на аватар"
-                       required />
-                  <span className="popup__input-error avatar-input-error">Ошибка</span>
-                  <button className="popup__save-button button-action">Сохранить</button>
-              </>
-          }
-        />
+          onClose={closeAllPopups}>
+            <input type="url"
+                   id="avatar-input"
+                   className="popup__text-input
+                    popup__text-input_type_avatar"
+                 name="avatar"
+                 placeholder="Ссылка на аватар"
+                   required />
+            <span className="popup__input-error avatar-input-error">Ошибка</span>
+        </PopupWithForm>
 
         <PopupWithForm
         name="edit-profile"
         title="Редактировать профиль"
+        textButton="Сохранить"
         isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-        children={
-            <>
+        onClose={closeAllPopups}>
                 <input type="text"
                        id="name-input"
                        className="popup__text-input popup__text-input_type_name"
@@ -93,19 +89,16 @@ function App() {
                        required minLength="2"
                        maxLength="200" />
                 <span className="popup__input-error about-input-error">&nbsp;</span>
-                <button type="submit" className="popup__save-button button-action">Сохранить</button>
-            </>
-        }
 
-        />
+        </PopupWithForm>
 
         <PopupWithForm
           name="add-card"
           title="Новое место"
+          textButton="Создать"
           isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          children={
-            <>
+          onClose={closeAllPopups}>
+
               <input type="text" id="title-input" className="popup__text-input popup__text-input_type_title" name="name"
                      placeholder="Название"
                      required minLength="2" maxLength="30" />
@@ -113,11 +106,7 @@ function App() {
                 <input type="url" id="link-input" className="popup__text-input popup__text-input_type_link" name="link"
                        placeholder="Ссылка на картинку" required />
                   <span className="popup__input-error link-input-error">Ошибка</span>
-                  <button className="popup__save-button button-action">Создать</button>
-            </>
-          }
-
-        />
+        </PopupWithForm>
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         <template className="photo-gallery__item-template">

@@ -4,6 +4,7 @@
   "description": "Educational project",
   "author": "Ivan Monichev",
   "private": true,
+  "homepage": "https://ivanmonichev.github.io/mesto-react",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
