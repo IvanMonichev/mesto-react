@@ -50,7 +50,6 @@ function App() {
     setSelectedCard({name: '', link: ''})
   }
 
-
   return (
       <CurrentUserContext.Provider value={currentUser}>
         <Header />

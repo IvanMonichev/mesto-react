@@ -2,7 +2,7 @@ import trash from "../images/trash.svg";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import React from "react";
 
-function Card({card, onCardClick, }) {
+function Card({card, onCardClick, onCardLike}) {
   // Подписываемся на контекст «CurrentUserContext».
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -26,6 +26,10 @@ function Card({card, onCardClick, }) {
     onCardClick(card);
   }
 
+  const handleLikeClick = () => {
+    onCardLike(card);
+  }
+
   return (
     <li className="photo-gallery__item">
       <img onClick={handleClick} src={`${card.link}`}
@@ -33,7 +37,7 @@ function Card({card, onCardClick, }) {
            className="photo-gallery__image"/>
       <h2 className="photo-gallery__title">{card.name}</h2>
       <div className="photo-gallery__like-section">
-        <button className={cardLikeButtonClassName}></button>
+        <button onClick={handleLikeClick} className={cardLikeButtonClassName}></button>
         <p className="photo-gallery__like-counter">{card.likes.length}</p>
       </div>
       <a className={cardDeleteButtonClassName}><img
