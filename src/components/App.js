@@ -4,8 +4,21 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import CurrentUserContext from "../contexts/CurrentUserContext";
+import api from "../utils/Api";
 
 function App() {
+
+  // Установка стейта текущего пользователя.
+  const [currentUser, setCurrentUser] = React.useState({});
+
+  React.useEffect(() => {
+    api.getAllData()
+      .then(([userData, cardsData]) => {
+        setCurrentUser(userData)
+      })
+      .catch(err => console.log(err));
+  }, [])
 
   // Установка хуков на управление состояния формы (открыта/закрыта)
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
@@ -39,7 +52,7 @@ function App() {
 
 
   return (
-      <>
+      <CurrentUserContext.Provider value={currentUser}>
         <Header />
 
         <Main
@@ -113,7 +126,7 @@ function App() {
 
         </template>
 
-      </>
+      </CurrentUserContext.Provider>
   );
 }
 
