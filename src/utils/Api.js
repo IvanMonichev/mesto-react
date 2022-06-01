@@ -91,6 +91,10 @@ export class Api {
     return Promise.all([this.getUserData(), this.getCardsData()])
   }
 
+  changeLikeCardStatus(isLiked, id) {
+
+  }
+
 }
 
 const api = new Api({

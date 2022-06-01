@@ -18,6 +18,11 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
       })
       .catch(err => console.log(err));
   }, [])
+  
+  function handleCardLike(cards) {
+    const isLiked = cards.likes.some(like => like._id === currentUser._id);
+
+  }
     
     return (
         <main className="main">
