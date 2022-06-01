@@ -91,8 +91,12 @@ export class Api {
     return Promise.all([this.getUserData(), this.getCardsData()])
   }
 
-  changeLikeCardStatus(isLiked, id) {
-
+  changeLikeCardStatus(id, isLiked) {
+    if(isLiked) {
+      return this.likeCard(id);
+    } else {
+      return this.dislikeCard(id)
+    }
   }
 
 }

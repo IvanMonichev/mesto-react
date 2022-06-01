@@ -19,9 +19,12 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
       .catch(err => console.log(err));
   }, [])
   
-  function handleCardLike(cards) {
-    const isLiked = cards.likes.some(like => like._id === currentUser._id);
-
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(like => like._id === currentUser._id);
+    api.changeLikeCardStatus(card._id, isLiked)
+      .then(newCard => {
+        setCards((state) => state.map(c => c._id === card._id ? newCard : c))
+      })
   }
     
     return (
@@ -43,7 +46,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
             <section className="photo-gallery">
                 <ul className="photo-gallery__list">
                   {cards.map((card) =>
-                    <Card key={card._id} card={card} onCardClick={onCardClick}/>)}
+                    <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={handleCardLike}/>)}
                 </ul>
             </section>
         </main>
