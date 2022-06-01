@@ -4,7 +4,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
-import CurrentUserContext from "../contexts/CurrentUserContext";
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import api from "../utils/Api";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
 
   React.useEffect(() => {
     api.getAllData()
-      .then(([userData, cardsData]) => {
+      .then(([userData]) => {
         setCurrentUser(userData)
       })
       .catch(err => console.log(err));

@@ -1,22 +1,19 @@
 import React from "react";
 import api from '../utils/Api'
 import Card from './Card'
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
 
-  // Установка хуков.
-  const [userName, setUserName] = React.useState('');
-  const [userDescription, setUserDescription] = React.useState('');
-  const [userAvatar, setUserAvatar] = React.useState('');
+  // Подписываемся на контекст «CurrentUserContext».
+  const currentUser = React.useContext(CurrentUserContext);
+
   const [cards, setCards] = React.useState([]);
 
   //  Установка эффекта для стейта, где обрабатываются данные.
   React.useEffect(() => {
     api.getAllData()
       .then(([userData, cardsData]) => {
-        setUserName(userData.name);
-        setUserDescription(userData.about);
-        setUserAvatar(userData.avatar);
         setCards(cardsData);
       })
       .catch(err => console.log(err));
@@ -26,14 +23,14 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
         <main className="main">
             <section className="profile">
                 <div className="profile-avatar">
-                    <img src={userAvatar} alt={`Аватар пользователя – ${userName}`} className="profile-avatar__image"/>
+                    <img src={currentUser.avatar} alt={`Аватар пользователя – ${currentUser.name}`} className="profile-avatar__image"/>
                     <button className="profile-avatar__edit-avatar" onClick={onEditAvatar}></button>
                 </div>
 
                 <div className="profile__info">
-                    <h1 className="profile__title">{userName}</h1>
+                    <h1 className="profile__title">{currentUser.name}</h1>
                     <button className="profile__edit-button button-action" onClick={onEditProfile}></button>
-                    <p className="profile__subtitle">{userDescription}</p>
+                    <p className="profile__subtitle">{currentUser.about}</p>
                 </div>
                 <button className="profile__add-button button-action" onClick={onAddPlace}></button>
             </section>
