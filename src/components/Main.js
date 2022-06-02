@@ -21,10 +21,22 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
   
   function handleCardLike(card) {
     const isLiked = card.likes.some(like => like._id === currentUser._id);
-    api.changeLikeCardStatus(card._id, isLiked)
+    console.log(isLiked);
+    api.changeLikeCardStatus(card._id, !isLiked)
       .then(newCard => {
-        setCards((state) => state.map(c => c._id === card._id ? newCard : c))
+        setCards(cards => cards.map(c => c._id === card._id ? newCard : c));
       })
+      .catch(err => console.log(err));
+  }
+
+  // Удаление карточки
+  function handleDeleteCard(card) {
+    api.deleteCard(card._id)
+      .then(() => {
+        // Устанавливаем в стейт новый массив без удалённой карточки.
+        setCards(cards.filter(item => item._id !== card._id));
+      })
+      .catch(err => console.log(err));
   }
     
     return (
@@ -46,7 +58,12 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
             <section className="photo-gallery">
                 <ul className="photo-gallery__list">
                   {cards.map((card) =>
-                    <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={handleCardLike}/>)}
+                    <Card key={card._id}
+                          card={card}
+                          onCardClick={onCardClick}
+                          onCardLike={handleCardLike}
+                          onCardDelete={handleDeleteCard}
+                    />)}
                 </ul>
             </section>
         </main>
