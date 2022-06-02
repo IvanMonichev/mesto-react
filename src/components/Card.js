@@ -12,7 +12,7 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем.
   const isLiked = card.likes.some(like => like._id === currentUser._id);
 
-  // Отключаем кнопку удаления, если мы не является владельцем.
+  // Отключаем кнопку удаления, если мы не является владельцем картинки.
   const cardDeleteButtonClassName = (
     `photo-gallery__delete-button ${isOwn ? 'button-action' : 'photo-gallery__delete-button_disabled'}`
   );

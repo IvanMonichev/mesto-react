@@ -4,6 +4,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
+import EditProfilePopup from "./EditProfilePopup";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import api from "../utils/Api";
 
@@ -61,6 +62,9 @@ function App() {
           onCardClick={handleCardClick}
         />
         <Footer/>
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups} />
 
         <PopupWithForm
           name="edit-avatar"
@@ -68,40 +72,14 @@ function App() {
           textButton="Сохранить"
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}>
-            <input type="url"
-                   id="avatar-input"
-                   className="popup__text-input
+          <input type="url"
+                 id="avatar-input"
+                 className="popup__text-input
                     popup__text-input_type_avatar"
                  name="avatar"
                  placeholder="Ссылка на аватар"
-                   required />
-            <span className="popup__input-error avatar-input-error">Ошибка</span>
-        </PopupWithForm>
-
-        <PopupWithForm
-        name="edit-profile"
-        title="Редактировать профиль"
-        textButton="Сохранить"
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}>
-                <input type="text"
-                       id="name-input"
-                       className="popup__text-input popup__text-input_type_name"
-                       name="name"
-                       placeholder="Имя"
-                       required minLength="2"
-                       maxLength="40" />
-                <span className="popup__input-error name-input-error">Ошибка</span>
-                <input type="text"
-                       id="about-input"
-                       className="popup__text-input
-                       popup__text-input_type_about"
-                       name="about"
-                       placeholder="О себе"
-                       required minLength="2"
-                       maxLength="200" />
-                <span className="popup__input-error about-input-error">&nbsp;</span>
-
+                 required />
+          <span className="popup__input-error avatar-input-error">Ошибка</span>
         </PopupWithForm>
 
         <PopupWithForm
