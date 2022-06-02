@@ -33,7 +33,6 @@
 @import url(./blocks/photo-gallery/__like-section/photo-gallery__like-section.css);
 @import url(./blocks/photo-gallery/__like-button/_active/photo-gallery__like-button_active.css);
 @import url(./blocks/photo-gallery/__delete-button/photo-gallery__delete-button.css);
-@import url(./blocks/photo-gallery/__delete-button/_disabled/photo-gallery__delete-button_disabled.css);
 
 /* Footer */
 @import url(./blocks/footer/footer.css);

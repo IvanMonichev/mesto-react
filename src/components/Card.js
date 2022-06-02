@@ -9,13 +9,12 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
   // Определяем, являемся ли мы владельцем текущей карточки.
   const isOwn = card.owner._id === currentUser._id;
 
+  const handleDeleteClick = () => {
+    onCardDelete(card);
+  }
+
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем.
   const isLiked = card.likes.some(like => like._id === currentUser._id);
-
-  // Отключаем кнопку удаления, если мы не является владельцем картинки.
-  const cardDeleteButtonClassName = (
-    `photo-gallery__delete-button ${isOwn ? 'button-action' : 'photo-gallery__delete-button_disabled'}`
-  );
 
   // Включаем стиль активного лайка, если лайкнули мы.
   const cardLikeButtonClassName = (
@@ -30,9 +29,7 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
     onCardLike(card);
   }
 
-  const handleDeleteClick = () => {
-    onCardDelete(card);
-  }
+
 
   return (
     <li className="photo-gallery__item">
@@ -44,8 +41,8 @@ function Card({card, onCardClick, onCardLike, onCardDelete}) {
         <button onClick={handleLikeClick} className={cardLikeButtonClassName}></button>
         <p className="photo-gallery__like-counter">{card.likes.length}</p>
       </div>
-      <a onClick={handleDeleteClick} className={cardDeleteButtonClassName}><img
-        src={trash} alt="Корзина удаления"/></a>
+      {isOwn && <a onClick={handleDeleteClick} className="photo-gallery__delete-button button-action"><img
+        src={trash} alt="Корзина удаления"/></a>}
     </li>)
 }
 

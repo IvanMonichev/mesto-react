@@ -21,7 +21,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
   
   function handleCardLike(card) {
     const isLiked = card.likes.some(like => like._id === currentUser._id);
-    console.log(isLiked);
+
     api.changeLikeCardStatus(card._id, !isLiked)
       .then(newCard => {
         setCards(cards => cards.map(c => c._id === card._id ? newCard : c));
