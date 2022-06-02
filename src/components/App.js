@@ -19,6 +19,15 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''});
 
+  React.useEffect(() => {
+    api.getAllData()
+      .then(([userData, cardsData]) => {
+        setCurrentUser(userData)
+        setCards(cardsData);
+      })
+      .catch(err => console.log(err));
+  }, [])
+
   // Вызов обработчиков для изменения состояния
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(!isEditAvatarPopupOpen);
@@ -63,22 +72,9 @@ function App() {
       .catch(err => console.log(err));
   }
 
-  React.useEffect(() => {
-    api.getAllData()
-      .then(([userData]) => {
-        setCurrentUser(userData)
-      })
-      .catch(err => console.log(err));
-  }, [])
+  const handleUpdateUser = () => console.log('test');
 
-  //  Установка эффекта для стейта, где обрабатываются данные.
-  React.useEffect(() => {
-    api.getAllData()
-      .then(([userData, cardsData]) => {
-        setCards(cardsData);
-      })
-      .catch(err => console.log(err));
-  }, [])
+
 
   return (
       <CurrentUserContext.Provider value={currentUser}>
@@ -97,6 +93,7 @@ function App() {
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
         />
 
         <PopupWithForm
