@@ -2,7 +2,7 @@ import trash from "../images/trash.svg";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import React from "react";
 
-function Card({card, onCardClick, onCardLike, onCardDelete}) {
+function Card({card, onCardClick, onCardDelete, onCardLike}) {
   // Подписываемся на контекст «CurrentUserContext».
   const currentUser = React.useContext(CurrentUserContext);
 
