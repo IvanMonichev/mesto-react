@@ -96,7 +96,8 @@ function App() {
         <Footer/>
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups} />
+          onClose={closeAllPopups}
+        />
 
         <PopupWithForm
           name="edit-avatar"

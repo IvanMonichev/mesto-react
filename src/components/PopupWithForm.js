@@ -1,6 +1,12 @@
 import React from "react";
 
 function PopupWithForm({name, title, textButton, children, isOpen, onClose}) {
+  const [name, setName] = React.useState();
+  const [description, setDescription] = React.useState();
+
+  const handleChangeName = (event) => {
+
+  }
 
   return (
     <section className={`popup popup_type_${name} ${isOpen && 'popup_is-opened'}`}>
