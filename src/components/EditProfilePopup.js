@@ -1,17 +1,33 @@
 import PopupWithForm from "./PopupWithForm";
 import React from "react";
+import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
-function EditProfilePopup({isOpen, onClose}) {
+function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
 
-  const [name, setName] = React.useState();
-  const [description, setDescription] = React.useState();
+  const currentUser = React.useContext(CurrentUserContext);
 
-  const handleChangeName = (event) => {
+  const [name, setName] = React.useState('');
+  const [description, setDescription] = React.useState('');
+
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser]);
+
+  const handleChangeName = event => {
     setName(event.target.value);
   }
 
-  const handleChangeDescription = (event) =>  {
+  const handleChangeDescription = event =>  {
     setDescription(event.target.value);
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    onUpdateUser({
+      name,
+      about: description
+    })
   }
 
   return (
@@ -20,7 +36,8 @@ function EditProfilePopup({isOpen, onClose}) {
       title="Редактировать профиль"
       textButton="Сохранить"
       isOpen={isOpen}
-      onClose={onClose}>
+      onClose={onClose}
+      onSubmit={handleSubmit}>
       <input type="text"
              id="name-input"
              className="popup__text-input popup__text-input_type_name"
@@ -29,6 +46,7 @@ function EditProfilePopup({isOpen, onClose}) {
              required minLength="2"
              maxLength="40"
              onChange={handleChangeName}
+             value={name || ''}
       />
       <span className="popup__input-error name-input-error">Ошибка</span>
       <input type="text"
@@ -40,6 +58,7 @@ function EditProfilePopup({isOpen, onClose}) {
              required minLength="2"
              maxLength="200"
              onChange={handleChangeDescription}
+             value={description || ''}
       />
       <span className="popup__input-error about-input-error">&nbsp;</span>
 

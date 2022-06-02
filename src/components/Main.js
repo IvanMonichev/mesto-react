@@ -16,7 +16,6 @@ function Main({
   // Подписываемся на контекст «CurrentUserContext».
   const currentUser = React.useContext(CurrentUserContext);
 
-
   return (
     <main className="main">
       <section className="profile">

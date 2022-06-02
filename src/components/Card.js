@@ -29,8 +29,6 @@ function Card({card, onCardClick, onCardDelete, onCardLike}) {
     onCardLike(card);
   }
 
-
-
   return (
     <li className="photo-gallery__item">
       <img onClick={handleClick} src={`${card.link}`}

@@ -22,11 +22,20 @@ function App() {
   React.useEffect(() => {
     api.getAllData()
       .then(([userData, cardsData]) => {
-        setCurrentUser(userData)
+        setCurrentUser(userData);
         setCards(cardsData);
       })
       .catch(err => console.log(err));
   }, [])
+  console.log(currentUser);
+  const handleUpdateUser = ({name, about}) => {
+    api.setUserInfo({name, about})
+      .then(() => {
+        console.log(...currentUser);
+        setCurrentUser({...currentUser, name, about});
+        setEditProfilePopupOpen(false);
+      })
+  };
 
   // Вызов обработчиков для изменения состояния
   function handleEditAvatarClick() {
@@ -71,10 +80,6 @@ function App() {
       })
       .catch(err => console.log(err));
   }
-
-  const handleUpdateUser = () => console.log('test');
-
-
 
   return (
       <CurrentUserContext.Provider value={currentUser}>

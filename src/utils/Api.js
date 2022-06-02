@@ -88,7 +88,7 @@ export class Api {
   }
 
   getAllData() {
-    return Promise.all([this.getUserData(), this.getCardsData()])
+    return Promise.all([this.getUserData(), this.getCardsData()]);
   }
 
   changeLikeCardStatus(id, isLiked) {
