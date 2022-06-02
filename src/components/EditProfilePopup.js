@@ -2,6 +2,18 @@ import PopupWithForm from "./PopupWithForm";
 import React from "react";
 
 function EditProfilePopup({isOpen, onClose}) {
+
+  const [name, setName] = React.useState();
+  const [description, setDescription] = React.useState();
+
+  const handleChangeName = (event) => {
+    setName(event.target.value);
+  }
+
+  const handleChangeDescription = (event) =>  {
+    setDescription(event.target.value);
+  }
+
   return (
     <PopupWithForm
       name="edit-profile"
@@ -15,7 +27,9 @@ function EditProfilePopup({isOpen, onClose}) {
              name="name"
              placeholder="Имя"
              required minLength="2"
-             maxLength="40" />
+             maxLength="40"
+             onChange={handleChangeName}
+      />
       <span className="popup__input-error name-input-error">Ошибка</span>
       <input type="text"
              id="about-input"
@@ -24,7 +38,9 @@ function EditProfilePopup({isOpen, onClose}) {
              name="about"
              placeholder="О себе"
              required minLength="2"
-             maxLength="200" />
+             maxLength="200"
+             onChange={handleChangeDescription}
+      />
       <span className="popup__input-error about-input-error">&nbsp;</span>
 
     </PopupWithForm>
