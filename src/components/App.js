@@ -2,7 +2,6 @@ import React from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import EditProfilePopup from "./EditProfilePopup";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
@@ -44,6 +43,15 @@ function App() {
       .then(() => {
         setCurrentUser({...currentUser, avatar});
         setEditAvatarPopupOpen(false);
+      })
+      .catch(err => console.log(err));
+  }
+
+  const handleAddCard = ({name, link}) => {
+    api.addCard({name, link})
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        setAddPlacePopupOpen(false);
       })
       .catch(err => console.log(err));
   }
@@ -121,6 +129,7 @@ function App() {
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
+          onAddCard={handleAddCard}
         />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
