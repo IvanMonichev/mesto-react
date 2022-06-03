@@ -7,9 +7,16 @@ function ImagePopup({card, onClose}) {
       return false;
   }
 
+  const handleOverlayClose = (event) => {
+    if (event.target !== event.currentTarget) {
+      return;
+    }
+    onClose();
+  }
+
   return (
 
-        <section className={`popup popup_dark-overlay image-zoom ${isOpen() && 'popup_is-opened'}`}>
+        <section onClick={handleOverlayClose} className={`popup popup_dark-overlay image-zoom ${isOpen() && 'popup_is-opened'}`}>
             <div className="image-zoom__container">
                 <figure className="image-zoom__figure">
                     <img className="image-zoom__image" src={`${isOpen() ? card.link : ""}`}

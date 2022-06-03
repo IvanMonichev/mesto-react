@@ -92,7 +92,6 @@ function App() {
     setSelectedCard({name: '', link: ''})
   }
 
-
   function handleDeleteCardPopupClick(card) {
     setDeleteCardPopupOpen(!isDeleteCardPopupOpen);
     setCard(card);
