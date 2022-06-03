@@ -8,6 +8,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import api from "../utils/Api";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
 
@@ -117,21 +118,10 @@ function App() {
           onUpdateAvatar={handleUpdateAvatar}
         />
 
-        <PopupWithForm
-          name="add-card"
-          title="Новое место"
-          textButton="Создать"
+        <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}>
-
-              <input type="text" id="title-input" className="popup__text-input popup__text-input_type_title" name="name"
-                     placeholder="Название"
-                     required minLength="2" maxLength="30" />
-                <span className="popup__input-error title-input-error">Ошибка</span>
-                <input type="url" id="link-input" className="popup__text-input popup__text-input_type_link" name="link"
-                       placeholder="Ссылка на картинку" required />
-                  <span className="popup__input-error link-input-error">Ошибка</span>
-        </PopupWithForm>
+          onClose={closeAllPopups}
+        />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         <template className="photo-gallery__item-template">
