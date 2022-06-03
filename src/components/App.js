@@ -8,6 +8,7 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 import api from "../utils/Api";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
+import DeleteCardPopup from "./DeleteCardPopup";
 
 function App() {
 
@@ -18,8 +19,10 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+  const [isDeleteCardPopupOpen, setDeleteCardPopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''});
   const [isLoading, setIsLoading] = React.useState(false);
+  const [card, setCard] = React.useState([]);
 
   React.useEffect(() => {
     api.getAllData()
@@ -85,17 +88,30 @@ function App() {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
+    setDeleteCardPopupOpen(false);
     setSelectedCard({name: '', link: ''})
   }
 
+
+  function handleDeleteCardPopupClick(card) {
+    setDeleteCardPopupOpen(!isDeleteCardPopupOpen);
+    setCard(card);
+  }
+
   // Удаление карточки
-  function handleDeleteCard(card) {
+  function handleDeleteCard() {
+    setIsLoading(true);
     api.deleteCard(card._id)
       .then(() => {
         // Устанавливаем в стейт новый массив без удалённой карточки.
         setCards(cards.filter(item => item._id !== card._id));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => {
+        setDeleteCardPopupOpen(false);
+        setIsLoading(false)
+      });
+
   }
 
   function handleCardLike(card) {
@@ -118,7 +134,7 @@ function App() {
           onAddPlace={handleAddPlaceClick}
           cards={cards}
           onCardClick={handleCardClick}
-          onCardDelete={handleDeleteCard}
+          onCardDelete={handleDeleteCardPopupClick}
           onCardLike={handleCardLike}
         />
         <Footer/>
@@ -141,6 +157,13 @@ function App() {
           onClose={closeAllPopups}
           onAddCard={handleAddCard}
           buttonText={isLoading ? "Создание..." : "Создать"}
+        />
+
+        <DeleteCardPopup
+          isOpen={isDeleteCardPopupOpen}
+          onClose={closeAllPopups}
+          buttonText={isLoading ? "Удаление..." : "Удалить"}
+          onDeleteCard={handleDeleteCard}
         />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />

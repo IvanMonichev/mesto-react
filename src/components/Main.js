@@ -9,7 +9,7 @@ function Main({
                 cards,
                 onCardClick,
                 onCardDelete,
-                onCardLike
+                onCardLike,
               }
 ) {
 
