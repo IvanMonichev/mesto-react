@@ -39,7 +39,6 @@ function App() {
   };
 
   const handleUpdateAvatar = ({avatar}) => {
-    console.log({avatar})
     api.editAvatar({avatar})
       .then(() => {
         setCurrentUser({...currentUser, avatar});
