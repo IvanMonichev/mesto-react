@@ -19,6 +19,7 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({name: '', link: ''});
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     api.getAllData()
@@ -30,30 +31,37 @@ function App() {
   }, [])
 
   const handleUpdateUser = ({name, about}) => {
+    setIsLoading(true);
     api.setUserInfo({name, about})
       .then(() => {
         setCurrentUser({...currentUser, name, about});
         setEditProfilePopupOpen(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => setIsLoading(false));
+
   };
 
   const handleUpdateAvatar = ({avatar}) => {
+    setIsLoading(true);
     api.editAvatar({avatar})
       .then(() => {
         setCurrentUser({...currentUser, avatar});
         setEditAvatarPopupOpen(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => setIsLoading(false));
   }
 
   const handleAddCard = ({name, link}) => {
+    setIsLoading(true);
     api.addCard({name, link})
       .then((newCard) => {
         setCards([newCard, ...cards]);
         setAddPlacePopupOpen(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => setIsLoading(false));
   }
 
   // Вызов обработчиков для изменения состояния
@@ -118,18 +126,21 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          buttonText={isLoading ? "Сохранение..." : "Сохранить"}
         />
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
+          buttonText={isLoading ? "Сохранение..." : "Сохранить"}
         />
 
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddCard={handleAddCard}
+          buttonText={isLoading ? "Создание..." : "Создать"}
         />
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
