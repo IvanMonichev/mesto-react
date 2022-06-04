@@ -20,8 +20,8 @@ function Main({
     <main className="main">
       <section className="profile">
         <div className="profile-avatar">
-          <img src={currentUser.avatar} alt={`Аватар пользователя – ${currentUser.name}`}
-               className="profile-avatar__image"/>
+          {currentUser.avatar && <img src={currentUser.avatar} alt={`Аватар пользователя – ${currentUser.name}`}
+               className="profile-avatar__image"/>}
           <button className="profile-avatar__edit-avatar" onClick={onEditAvatar}></button>
         </div>
 
